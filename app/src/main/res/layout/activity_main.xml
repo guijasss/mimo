@@ -1,0 +1,60 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Título -->
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Doe itens! Faça a diferença!"
+        android:textSize="24sp"
+        android:textStyle="bold"/>
+
+    <!-- Botão de Doar Agora -->
+    <Button
+        android:id="@+id/donate_now_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Donate Now"/>
+
+    <!-- Campanhas em Destaque -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Campanhas em Destaque"
+        android:textSize="20sp"
+        android:layout_marginTop="16dp"/>
+
+    <RecyclerView
+        android:id="@+id/featured_campaigns_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"/>
+
+    <!-- Últimas Doações -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Últimas Doações"
+        android:textSize="20sp"
+        android:layout_marginTop="16dp"/>
+
+    <RecyclerView
+        android:id="@+id/latest_donations_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <!-- Ver todos -->
+    <TextView
+        android:id="@+id/view_all_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ver todos"
+        android:layout_marginTop="8dp"
+        android:textColor="@android:color/holo_blue_dark"/>
+
+</LinearLayout>

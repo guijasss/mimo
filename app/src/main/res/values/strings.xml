@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">mimo</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="doe_agora">Doe Agora!</string>
+    <string name="bem_vindo_ao_app_de_doa_es">Bem-vindo ao app de doações!</string>
+    <string name="t_tulo_da_doa_o">Título da Doação</string>
+    <string name="descri_o_da_doa_o">Descrição da Doação</string>
+</resources>
