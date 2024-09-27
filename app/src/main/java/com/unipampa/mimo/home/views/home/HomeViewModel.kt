@@ -1,13 +1,13 @@
-package com.unipampa.mimo.ui.slideshow
+package com.unipampa.mimo.home.views.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class SlideshowViewModel : ViewModel() {
+class HomeViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is slideshow Fragment"
+        value = "This is XQDL Fragment"
     }
     val text: LiveData<String> = _text
 }

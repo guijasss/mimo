@@ -1,4 +1,4 @@
-package com.unipampa.mimo.ui.gallery
+package com.unipampa.mimo.home.views.gallery
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

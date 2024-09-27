@@ -1,4 +1,4 @@
-package com.unipampa.mimo.ui.slideshow
+package com.unipampa.mimo.home.views.slideshow
 
 import android.os.Bundle
 import android.view.LayoutInflater

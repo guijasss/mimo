@@ -1,4 +1,4 @@
-package com.unipampa.mimo.ui.gallery
+package com.unipampa.mimo.home.views.gallery
 
 import android.os.Bundle
 import android.view.LayoutInflater

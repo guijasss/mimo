@@ -1,60 +1,50 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:orientation="vertical">
 
-    <!-- Título -->
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Doe itens! Faça a diferença!"
-        android:textSize="24sp"
-        android:textStyle="bold"/>
-
-    <!-- Botão de Doar Agora -->
-    <Button
-        android:id="@+id/donate_now_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Donate Now"/>
-
-    <!-- Campanhas em Destaque -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Campanhas em Destaque"
-        android:textSize="20sp"
-        android:layout_marginTop="16dp"/>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/featured_campaigns_recycler"
+    <!-- Header -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"/>
+        android:orientation="horizontal"
+        android:padding="16dp">
 
-    <!-- Últimas Doações -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Últimas Doações"
-        android:textSize="20sp"
-        android:layout_marginTop="16dp"/>
+        <TextView
+            android:id="@+id/app_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mimo"
+            android:textSize="24sp"
+            android:layout_gravity="start" />
+    </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/latest_donations_recycler"
+    <!-- Body with ScrollView -->
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-    <!-- Ver todos -->
-    <TextView
-        android:id="@+id/view_all_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ver todos"
-        android:layout_marginTop="8dp"
-        android:textColor="@android:color/holo_blue_dark"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
 
+            <!-- Section for Donation Items -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:text="Anúncios"
+                android:textSize="20sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false" />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
