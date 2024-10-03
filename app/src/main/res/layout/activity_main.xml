@@ -1,50 +1,175 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    tools:context=".home.views.MainActivity"
+    android:padding="16dp">
 
-    <!-- Header -->
-    <LinearLayout
-        android:layout_width="match_parent"
+    <EditText
+        android:id="@+id/search_bar"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="16dp">
+        android:hint="Buscar itens"
+        android:padding="12dp"
+        android:drawableStart="@drawable/ic_search"
+        android:drawablePadding="8dp"
+        android:background="@drawable/search_background"
+        android:elevation="4dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp"
+        android:layout_marginTop="64dp" />
 
+    <!-- Categorias Populares -->
+    <TextView
+        android:id="@+id/categorias_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Categorias Populares"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/search_bar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Linha de categorias -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <!-- Categoria de Alimentos -->
+    <ImageView
+        android:id="@+id/categoria_alimentos"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_cutlery"
+        android:contentDescription="Alimentos"
+        app:layout_constraintTop_toBottomOf="@id/categorias_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/guideline_center"
+        android:layout_margin="8dp"/>
+
+    <!-- Categoria de Roupas -->
+    <ImageView
+        android:id="@+id/categoria_roupas"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_tshirt"
+        android:contentDescription="Roupas"
+        app:layout_constraintTop_toBottomOf="@id/categorias_title"
+        app:layout_constraintStart_toEndOf="@id/guideline_center"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="8dp"/>
+
+    <!-- Categoria de Construção -->
+    <ImageView
+        android:id="@+id/categoria_construcao"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_wall"
+        android:contentDescription="Construção"
+        app:layout_constraintTop_toBottomOf="@id/categoria_alimentos"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/guideline_center"
+        android:layout_margin="8dp"/>
+
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/category_background"
+        android:layout_margin="8dp"
+        app:layout_constraintTop_toBottomOf="@id/categoria_roupas"
+        app:layout_constraintStart_toEndOf="@id/guideline_center"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Imagem da categoria -->
+        <ImageView
+            android:id="@+id/categoria_brinquedos"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_toy"
+            android:contentDescription="Brinquedos"
+            android:scaleType="centerInside" />
+
+        <!-- Descrição da imagem (sobreposta à imagem) -->
         <TextView
-            android:id="@+id/app_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Mimo"
-            android:textSize="24sp"
-            android:layout_gravity="start" />
-    </LinearLayout>
-
-    <!-- Body with ScrollView -->
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-
-        <LinearLayout
+            android:id="@+id/categoria_brinquedos_desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:text="Brinquedos"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:gravity="center"
+            android:layout_gravity="bottom"
+            android:layout_margin="4dp"
+            android:background="@android:color/white"
+            android:padding="4dp"/>
 
-            <!-- Section for Donation Items -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingBottom="8dp"
-                android:text="Anúncios"
-                android:textSize="20sp" />
+    </FrameLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clipToPadding="false" />
-        </LinearLayout>
-    </ScrollView>
-</LinearLayout>
+
+    <!-- Anúncio - Exemplo -->
+    <LinearLayout
+        android:id="@+id/anuncio_example"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/card_background"
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/categoria_construcao">
+
+        <TextView
+            android:id="@+id/anunciante_nome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Maria da Silva"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/anunciante_local"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Alegrete - RS"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/anuncio_titulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Roupas infantis para menino"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/anuncio_descricao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit..."
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/contatar_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Contatar" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
