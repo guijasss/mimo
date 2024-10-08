@@ -14,49 +14,28 @@ import com.unipampa.mimo.home.entities.Donation
 import com.unipampa.mimo.home.views.MainActivity
 
 
-class DonationAdapter(
-    private val activity: MainActivity,
-    private val context: Context,
-    private val donations: ArrayList<Donation>
+class DonationAdapter(private val donations: List<Donation>) : RecyclerView.Adapter<DonationAdapter.DonationViewHolder>() {
 
-) : RecyclerView.Adapter<DonationAdapter.ViewHolder>() {
-    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val userProfileImage: ImageView = view.findViewById(R.id.user_profile_image)
-        val userName: TextView = view.findViewById(R.id.user_name)
-        val userLocation: TextView = view.findViewById(R.id.user_location)
-        val itemTitle: TextView = view.findViewById(R.id.item_title)
-        val itemDescription: TextView = view.findViewById(R.id.item_description)
-        val itemImagesRecyclerView: RecyclerView = view.findViewById(R.id.item_images_recycler_view)
+    class DonationViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val title: TextView = itemView.findViewById(R.id.anuncio_titulo)
+        private val description: TextView = itemView.findViewById(R.id.anuncio_descricao)
+        private val category: TextView = itemView.findViewById(R.id.anuncio_categoria)
+
+        fun bind(donation: Donation) {
+            title.text = donation.title
+            description.text = donation.description
+            category.text = donation.category
+        }
     }
 
-    fun addDonation(donation: Donation) {
-        this.donations.add(donation)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DonationViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_donation, parent, false)
+        return DonationViewHolder(view)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_donation, parent, false)
-        return ViewHolder(view)
+    override fun onBindViewHolder(holder: DonationViewHolder, position: Int) {
+        holder.bind(donations[position])
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = donations[position]
-
-        // Usar Glide para carregar a imagem do perfil do usuário
-        Glide.with(holder.itemView.context)
-            .load(item.requester.profilePicture) // Supondo que isso seja uma URL
-            .into(holder.userProfileImage)
-
-        holder.userName.text = item.requester.name
-        holder.userLocation.text = item.requester.location.city
-        holder.itemTitle.text = item.title
-        holder.itemDescription.text = item.description
-
-        // Configurar o adapter para o RecyclerView das imagens
-        holder.itemImagesRecyclerView.layoutManager = LinearLayoutManager(holder.itemImagesRecyclerView.context, LinearLayoutManager.HORIZONTAL, false)
-        val imageAdapter = ImageAdapter(item.images, holder.itemImagesRecyclerView.context)
-        holder.itemImagesRecyclerView.adapter = imageAdapter
-    }
-
-    override fun getItemCount() = donations.size
+    override fun getItemCount(): Int = donations.size
 }

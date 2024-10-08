@@ -42,12 +42,27 @@
         android:textSize="14sp" />
 
     <TextView
+        android:id="@+id/anuncio_categoria"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Roupas"
+        android:textStyle="bold"
+        android:textSize="14sp" />
+
+    <!-- Divider positioned below the category TextView -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@android:color/black"
+        android:layout_marginTop="4dp" />
+
+    <TextView
         android:id="@+id/anuncio_titulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Roupas infantis para menino"
-        android:textSize="16sp"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
     <TextView
@@ -55,7 +70,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit..."
+        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit...Lorem ipsum dolor sit amet, consectetur adipiscing elit...Lorem ipsum dolor sit amet, consectetur adipiscing elit...Lorem ipsum dolor sit amet, consectetur adipiscing elit..."
         android:textSize="14sp" />
 
     <Button

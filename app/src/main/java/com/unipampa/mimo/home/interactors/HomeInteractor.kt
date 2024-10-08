@@ -12,7 +12,7 @@ class HomeInteractor(private val presenter: HomeContracts.Presenter) : HomeContr
             Donation(
                 title = "Camiseta",
                 description = "Estado de nova, comprada no ano passado",
-                images = arrayListOf("image1.jpg", "image2.jpg", "image3.jpg"),
+                category = "Roupas",
                 requester = User(
                     name = "Maria da Silva",
                     location = Location(
