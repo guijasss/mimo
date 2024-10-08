@@ -6,27 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.unipampa.mimo.R
 import com.unipampa.mimo.home.entities.Donation
-import com.unipampa.mimo.home.views.MainActivity
 
 
-class DonationAdapter(private val donations: List<Donation>) : RecyclerView.Adapter<DonationAdapter.DonationViewHolder>() {
-
-    class DonationViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val title: TextView = itemView.findViewById(R.id.anuncio_titulo)
-        private val description: TextView = itemView.findViewById(R.id.anuncio_descricao)
-        private val category: TextView = itemView.findViewById(R.id.anuncio_categoria)
-
-        fun bind(donation: Donation) {
-            title.text = donation.title
-            description.text = donation.description
-            category.text = donation.category
-        }
-    }
+class DonationAdapter : ListAdapter<Donation, DonationViewHolder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DonationViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_donation, parent, false)
@@ -34,8 +21,35 @@ class DonationAdapter(private val donations: List<Donation>) : RecyclerView.Adap
     }
 
     override fun onBindViewHolder(holder: DonationViewHolder, position: Int) {
-        holder.bind(donations[position])
+        holder.bind(getItem(position))
+    }
+}
+
+// ViewHolder
+class DonationViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    private val nameTextView: TextView = itemView.findViewById(R.id.anunciante_nome)
+    private val locationTextView: TextView = itemView.findViewById(R.id.anunciante_local)
+    private val categoryTextView: TextView = itemView.findViewById(R.id.anuncio_categoria)
+    private val titleTextView: TextView = itemView.findViewById(R.id.anuncio_titulo)
+    private val descriptionTextView: TextView = itemView.findViewById(R.id.anuncio_descricao)
+    private val photoImageView: ImageView = itemView.findViewById(R.id.anunciante_foto)
+
+    fun bind(ad: Donation) {
+        nameTextView.text = ad.requester.name
+        locationTextView.text = ad.requester.location.city
+        categoryTextView.text = ad.category
+        titleTextView.text = ad.title
+        descriptionTextView.text = ad.description
+        photoImageView.setImageResource(R.drawable.ic_user) // Ajuste conforme necessário
+    }
+}
+
+class DiffCallback : DiffUtil.ItemCallback<Donation>() {
+    override fun areItemsTheSame(oldItem: Donation, newItem: Donation): Boolean {
+        return oldItem.id == newItem.id
     }
 
-    override fun getItemCount(): Int = donations.size
+    override fun areContentsTheSame(oldItem: Donation, newItem: Donation): Boolean {
+        return oldItem == newItem
+    }
 }

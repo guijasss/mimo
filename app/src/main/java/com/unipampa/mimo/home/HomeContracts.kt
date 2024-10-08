@@ -8,12 +8,15 @@ interface HomeContracts {
         fun onDonationsListRetrieved(donationRequests: ArrayList<Donation>)
     }
 
-    interface Interactor {
-        fun downloadDonationsList()
-    }
-
     interface Presenter {
         fun requestDonationsList()
-        fun onDonationsListDownloaded(clientList: ArrayList<Donation>)
+    }
+
+    interface Interactor {
+        fun downloadDonationsList(callback: InteractorCallback)
+
+        interface InteractorCallback {
+            fun onDonationsRetrieved(donations: ArrayList<Donation>)
+        }
     }
 }
