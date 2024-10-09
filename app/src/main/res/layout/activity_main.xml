@@ -35,144 +35,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Central Guideline for splitting the screen into two columns -->
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5" />
-
-    <!-- Categoria Alimentos -->
-    <FrameLayout
-        android:id="@+id/categoria_alimentos"
+    <!-- RecyclerView for Horizontal Sliding Categories -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_categories"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:background="@drawable/category_background"
-        app:layout_constraintWidth_percent="0.45"
+        android:layout_marginTop="8dp"
         app:layout_constraintTop_toBottomOf="@id/categorias_title"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/guideline_center">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:orientation="horizontal"
+        tools:listitem="@layout/item_category" />
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:src="@drawable/ic_cutlery"
-            android:contentDescription="Alimentos"
-            android:scaleType="centerInside" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Alimentos"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@android:color/black"
-            android:gravity="center"
-            android:layout_gravity="bottom"
-            android:padding="4dp"/>
-    </FrameLayout>
-
-    <!-- Categoria Roupas -->
-    <FrameLayout
-        android:id="@+id/categoria_roupas"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:background="@drawable/category_background"
-        app:layout_constraintWidth_percent="0.45"
-        app:layout_constraintTop_toBottomOf="@id/categorias_title"
-        app:layout_constraintStart_toEndOf="@id/guideline_center"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:src="@drawable/ic_tshirt"
-            android:contentDescription="Roupas"
-            android:scaleType="centerInside" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Roupas"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@android:color/black"
-            android:gravity="center"
-            android:layout_gravity="bottom"
-            android:padding="4dp"/>
-    </FrameLayout>
-
-    <!-- Categoria Eletrônicos -->
-    <FrameLayout
-        android:id="@+id/categoria_eletronicos"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:background="@drawable/category_background"
-        app:layout_constraintWidth_percent="0.45"
-        app:layout_constraintTop_toBottomOf="@id/categoria_alimentos"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/guideline_center">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:src="@drawable/ic_wall"
-            android:contentDescription="Eletrônicos"
-            android:scaleType="centerInside" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Eletrônicos"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@android:color/black"
-            android:gravity="center"
-            android:layout_gravity="bottom"
-            android:padding="4dp"/>
-    </FrameLayout>
-
-    <!-- Categoria Brinquedos -->
-    <FrameLayout
-        android:id="@+id/categoria_brinquedos"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:background="@drawable/category_background"
-        app:layout_constraintWidth_percent="0.45"
-        app:layout_constraintTop_toBottomOf="@id/categoria_roupas"
-        app:layout_constraintStart_toEndOf="@id/guideline_center"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:src="@drawable/ic_toy"
-            android:contentDescription="Brinquedos"
-            android:scaleType="centerInside" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Brinquedos"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@android:color/black"
-            android:gravity="center"
-            android:layout_gravity="bottom"
-            android:padding="4dp"/>
-    </FrameLayout>
-
-    <!-- RecyclerView Anúncios -->
+    <!-- RecyclerView for Donations -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_anuncios"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/categoria_brinquedos"
+        app:layout_constraintTop_toBottomOf="@id/recycler_view_categories"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
