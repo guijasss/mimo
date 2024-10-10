@@ -1,7 +1,6 @@
 package com.unipampa.mimo.home.views
 
 import android.os.Bundle
-import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -39,7 +38,7 @@ class MainActivity : AppCompatActivity(), HomeContracts.View {
         categories = listOf(
             Category("Alimentos", R.drawable.ic_cutlery),
             Category("Roupas", R.drawable.ic_tshirt),
-            Category("Eletrônicos", R.drawable.ic_wall),
+            Category("Construção", R.drawable.ic_wall),
             Category("Brinquedos", R.drawable.ic_toy)
         )
 
