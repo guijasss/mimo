@@ -60,4 +60,17 @@
         android:layout_marginTop="16dp"
         tools:listitem="@layout/item_donation" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/button_create_donation_ad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:contentDescription="Adicionar"
+        app:srcCompat="@drawable/ic_plus"
+        app:tint="@color/white"
+        android:backgroundTint="@color/colorButtons"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:tint="@android:color/white"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

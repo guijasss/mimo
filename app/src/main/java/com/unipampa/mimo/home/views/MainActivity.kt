@@ -1,10 +1,12 @@
 package com.unipampa.mimo.home.views
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.unipampa.mimo.R
 import com.unipampa.mimo.home.HomeContracts
 import com.unipampa.mimo.home.adapters.CategoryAdapter
@@ -48,6 +50,12 @@ class MainActivity : AppCompatActivity(), HomeContracts.View {
             Toast.makeText(this, "Clicou em ${category.name}", Toast.LENGTH_SHORT).show()
         }
         recyclerViewCategories.adapter = categoryAdapter
+
+        val fab: FloatingActionButton = findViewById(R.id.button_create_donation_ad)
+        fab.setOnClickListener {
+            val intent = Intent(this, CreateDonationAdActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onDonationsListRetrieved(donationRequests: ArrayList<Donation>) {
