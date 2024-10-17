@@ -50,11 +50,11 @@
         android:textSize="14sp" />
 
     <!-- Divider positioned below the category TextView -->
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@android:color/black"
-        android:layout_marginTop="4dp" />
+<!--    <View-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="0.5dp"-->
+<!--        android:background="@android:color/black"-->
+<!--        android:layout_marginTop="4dp" />-->
 
     <TextView
         android:id="@+id/anuncio_titulo"
@@ -78,5 +78,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:backgroundTint="@color/colorButtons"
         android:text="Contatar" />
 </LinearLayout>

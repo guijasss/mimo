@@ -35,7 +35,7 @@ class DonationViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun bind(ad: Donation) {
         nameTextView.text = ad.requester.name
-        locationTextView.text = ad.requester.location.city
+        locationTextView.text = ad.requester.city // concat com estado
         categoryTextView.text = ad.category
         titleTextView.text = ad.title
         descriptionTextView.text = ad.description
