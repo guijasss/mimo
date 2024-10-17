@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "465896032714",
+    "project_id": "mimo-24342",
+    "storage_bucket": "mimo-24342.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:465896032714:android:a83832794ea002ff30e733",
+        "android_client_info": {
+          "package_name": "com.unipampa.mimo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKG4UGzgrwXgIUrstx54Vo-NbLCEzNNoE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
