@@ -5,5 +5,5 @@ data class Donation(
     val title: String,
     val description: String,
     val category: String,
-    val requester: User
+    val requester: User,
 )
