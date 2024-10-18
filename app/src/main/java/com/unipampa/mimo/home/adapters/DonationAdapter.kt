@@ -34,8 +34,8 @@ class DonationViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val photoImageView: ImageView = itemView.findViewById(R.id.anunciante_foto)
 
     fun bind(ad: Donation) {
-        nameTextView.text = ad.requester.name
-        locationTextView.text = ad.requester.city // concat com estado
+        nameTextView.text = "Maria da Silva"
+        locationTextView.text = "Alegrete" // concat com estado
         categoryTextView.text = ad.category
         titleTextView.text = ad.title
         descriptionTextView.text = ad.description

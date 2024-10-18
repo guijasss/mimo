@@ -27,27 +27,17 @@ class CreateDonationAdActivity : AppCompatActivity() {
             val description = descriptionEditText.text.toString()
             val category = categorySpinner.selectedItem.toString()
 
-            // Aqui você pode adicionar a lógica de criação da doação
             val donation = Donation(
-                id = 0, // O ID pode ser gerado automaticamente
+                id = 0,
                 title = title,
                 description = description,
-                category = category,
-                requester = User(
-                    name = "Nome do Usuário",
-                    city = "Cidade",
-                    state = "Estado",
-                    profilePicture = "path/to/profile/pic",
-                    username = "username",
-                    phoneNumbers = arrayListOf("123456789")
-                )
+                category = category
             )
 
-            // Retorna a doação criada para a MainActivity
             val resultIntent = Intent()
             resultIntent.putExtra(MainActivity.DONATION_EXTRA, donation)
             setResult(RESULT_OK, resultIntent)
-            finish() // Finaliza a atividade
+            finish()
         }
     }
 }
