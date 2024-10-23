@@ -2,6 +2,7 @@ package com.unipampa.mimo.home.views
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -50,6 +51,8 @@ class MainActivity : AppCompatActivity(), HomeContracts.View {
         val recyclerViewCategories = findViewById<RecyclerView>(R.id.recycler_view_categories)
         recyclerViewCategories.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         categoryAdapter = CategoryAdapter(categories) { category ->
+            val filteredDonations = donationsList.filter { it.category == category.name }
+            donationAdapter.submitList(filteredDonations)
             Toast.makeText(this, "Clicou em ${category.name}", Toast.LENGTH_SHORT).show()
         }
         recyclerViewCategories.adapter = categoryAdapter
