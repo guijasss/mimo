@@ -17,6 +17,7 @@ interface HomeContracts {
 
         interface InteractorCallback {
             fun onDonationsRetrieved(donations: ArrayList<Donation>)
+            fun onError(message: String)
         }
     }
 }

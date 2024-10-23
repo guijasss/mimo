@@ -6,27 +6,28 @@ import android.os.Parcelable
 import androidx.annotation.RequiresApi
 
 data class Donation(
-    val id: Int,
-    val title: String,
-    val description: String,
     val category: String,
-    val requester: User
+    val description: String,
+    val id: String,
+    val title: String
+//    val requester: User
 ) : Parcelable {
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     constructor(parcel: Parcel) : this(
-        parcel.readInt(),
         parcel.readString() ?: "",
         parcel.readString() ?: "",
         parcel.readString() ?: "",
-        parcel.readParcelable(User::class.java.classLoader, User::class.java) ?: User("", "", "", "", "", arrayListOf())    )
+        parcel.readString() ?: ""
+//        parcel.readParcelable(User::class.java.classLoader, User::class.java) ?: User("", "", "", "", "", arrayListOf())    )
+    )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeInt(id)
+        parcel.writeString(id)
         parcel.writeString(title)
         parcel.writeString(description)
         parcel.writeString(category)
-        parcel.writeParcelable(requester, flags)
+//        parcel.writeParcelable(requester, flags)
     }
 
     override fun describeContents(): Int {

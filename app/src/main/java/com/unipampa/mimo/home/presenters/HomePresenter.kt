@@ -9,6 +9,10 @@ class HomePresenter(private val interactor: HomeContracts.Interactor, private va
             override fun onDonationsRetrieved(donations: ArrayList<Donation>) {
                 view.onDonationsListRetrieved(donations)
             }
+
+            override fun onError(message: String) {
+                TODO("Not yet implemented")
+            }
         })
     }
 }

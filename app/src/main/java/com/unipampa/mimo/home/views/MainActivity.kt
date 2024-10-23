@@ -2,11 +2,13 @@ package com.unipampa.mimo.home.views
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.FirebaseApp
 import com.unipampa.mimo.R
 import com.unipampa.mimo.home.HomeContracts
 import com.unipampa.mimo.home.adapters.CategoryAdapter
@@ -27,6 +29,7 @@ class MainActivity : AppCompatActivity(), HomeContracts.View {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        FirebaseApp.initializeApp(this)
         setContentView(R.layout.activity_main)
 
         recyclerView = findViewById(R.id.recycler_view_anuncios)
@@ -48,6 +51,8 @@ class MainActivity : AppCompatActivity(), HomeContracts.View {
         val recyclerViewCategories = findViewById<RecyclerView>(R.id.recycler_view_categories)
         recyclerViewCategories.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         categoryAdapter = CategoryAdapter(categories) { category ->
+            val filteredDonations = donationsList.filter { it.category == category.name }
+            donationAdapter.submitList(filteredDonations)
             Toast.makeText(this, "Clicou em ${category.name}", Toast.LENGTH_SHORT).show()
         }
         recyclerViewCategories.adapter = categoryAdapter
