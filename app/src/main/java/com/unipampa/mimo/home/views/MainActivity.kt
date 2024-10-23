@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.FirebaseApp
 import com.unipampa.mimo.R
 import com.unipampa.mimo.home.HomeContracts
 import com.unipampa.mimo.home.adapters.CategoryAdapter
@@ -27,6 +28,7 @@ class MainActivity : AppCompatActivity(), HomeContracts.View {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        FirebaseApp.initializeApp(this)
         setContentView(R.layout.activity_main)
 
         recyclerView = findViewById(R.id.recycler_view_anuncios)

@@ -1,5 +1,6 @@
 package com.unipampa.mimo.home.views
 
+import java.util.UUID
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -7,14 +8,15 @@ import android.widget.EditText
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.firestore.FirebaseFirestore
 import com.unipampa.mimo.R
 import com.unipampa.mimo.home.entities.Donation
-import com.unipampa.mimo.home.entities.User
 
 class CreateDonationAdActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_create_donation_ad)
 
         val titleEditText = findViewById<EditText>(R.id.donation_title)
@@ -28,11 +30,22 @@ class CreateDonationAdActivity : AppCompatActivity() {
             val category = categorySpinner.selectedItem.toString()
 
             val donation = Donation(
-                id = 0,
+                id = UUID.randomUUID().toString(),
                 title = title,
                 description = description,
                 category = category
             )
+
+            val firestore = FirebaseFirestore.getInstance()
+            firestore.collection("donation")
+                .add(donation)
+                .addOnSuccessListener {
+                    Toast.makeText(this, "Doação criada com sucesso!", Toast.LENGTH_SHORT).show()
+                    finish() // Fecha a activity após salvar
+                }
+                .addOnFailureListener { e ->
+                    Toast.makeText(this, "Erro ao criar doação: ${e.message}", Toast.LENGTH_SHORT).show()
+                }
 
             val resultIntent = Intent()
             resultIntent.putExtra(MainActivity.DONATION_EXTRA, donation)

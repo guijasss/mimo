@@ -8,7 +8,7 @@ import androidx.annotation.RequiresApi
 data class Donation(
     val category: String,
     val description: String,
-    val id: Int,
+    val id: String,
     val title: String
 //    val requester: User
 ) : Parcelable {
@@ -17,13 +17,13 @@ data class Donation(
     constructor(parcel: Parcel) : this(
         parcel.readString() ?: "",
         parcel.readString() ?: "",
-        parcel.readInt(),
+        parcel.readString() ?: "",
         parcel.readString() ?: ""
 //        parcel.readParcelable(User::class.java.classLoader, User::class.java) ?: User("", "", "", "", "", arrayListOf())    )
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeInt(id)
+        parcel.writeString(id)
         parcel.writeString(title)
         parcel.writeString(description)
         parcel.writeString(category)
