@@ -1,5 +1,6 @@
 package com.unipampa.mimo.home.views
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -29,6 +30,14 @@ class MainActivity : AppCompatActivity(), HomeContracts.View {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        //Verifica se o usuário está autenticado
+        if (!isUserAuthenticated()) {
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+            return
+        }
+
         FirebaseApp.initializeApp(this)
         setContentView(R.layout.activity_main)
 
@@ -62,6 +71,11 @@ class MainActivity : AppCompatActivity(), HomeContracts.View {
             val intent = Intent(this, CreateDonationAdActivity::class.java)
             startActivityForResult(intent, CREATE_DONATION_REQUEST)
         }
+    }
+
+    private fun isUserAuthenticated(): Boolean {
+        val sharedPreferences = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+        return sharedPreferences.getBoolean("isAuthenticated", false)
     }
 
     override fun onDonationsListRetrieved(donationRequests: ArrayList<Donation>) {
