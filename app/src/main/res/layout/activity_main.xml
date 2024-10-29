@@ -35,6 +35,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+
     <!-- RecyclerView for Horizontal Sliding Categories -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_categories"
