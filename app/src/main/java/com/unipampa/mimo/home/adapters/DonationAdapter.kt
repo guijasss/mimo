@@ -3,11 +3,11 @@ package com.unipampa.mimo.home.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.unipampa.mimo.R
 import com.unipampa.mimo.home.entities.Donation
 
@@ -31,7 +31,6 @@ class DonationViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val categoryTextView: TextView = itemView.findViewById(R.id.anuncio_categoria)
     private val titleTextView: TextView = itemView.findViewById(R.id.anuncio_titulo)
     private val descriptionTextView: TextView = itemView.findViewById(R.id.anuncio_descricao)
-    private val photoImageView: ImageView = itemView.findViewById(R.id.anunciante_foto)
 
     fun bind(ad: Donation) {
         nameTextView.text = "Maria da Silva"
@@ -39,7 +38,8 @@ class DonationViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         categoryTextView.text = ad.category
         titleTextView.text = ad.title
         descriptionTextView.text = ad.description
-        photoImageView.setImageResource(R.drawable.ic_user) // Ajuste conforme necessário
+
+
     }
 }
 
