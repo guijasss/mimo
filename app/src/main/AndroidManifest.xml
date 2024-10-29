@@ -19,8 +19,6 @@
         <activity
             android:name=".home.views.CreateDonationAdActivity"
             android:exported="false" />
-        <activity
-            android:name=".home.views.MainActivity">
 
         <activity android:name=".RegisterActivity"
                   android:exported="true"/>
