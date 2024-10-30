@@ -13,5 +13,6 @@
 * integração total com Firebase
   * armazenar imagens no storage
   * armazenar credenciais
+  * recuperar credenciais OK
 * tela de contato com o anunciante
 * chat entre anunciante e interessado
