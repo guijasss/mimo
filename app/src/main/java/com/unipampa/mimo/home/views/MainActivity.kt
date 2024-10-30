@@ -3,7 +3,6 @@ package com.unipampa.mimo.home.views
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -31,7 +30,7 @@ class MainActivity : AppCompatActivity(), HomeContracts.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //Verifica se o usuário está autenticado
+        // Verifica se o usuário está autenticado
         if (!isUserAuthenticated()) {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
@@ -73,9 +72,21 @@ class MainActivity : AppCompatActivity(), HomeContracts.View {
         }
     }
 
+    // Verifica se o usuário está autenticado
     private fun isUserAuthenticated(): Boolean {
         val sharedPreferences = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
         return sharedPreferences.getBoolean("isAuthenticated", false)
+    }
+
+    // Limpa a sessão do usuário quando a aplicação for fechada
+    override fun onStop() {
+        super.onStop()
+        clearUserSession()
+    }
+
+    private fun clearUserSession() {
+        val sharedPreferences = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+        sharedPreferences.edit().putBoolean("isAuthenticated", false).apply()
     }
 
     override fun onDonationsListRetrieved(donationRequests: ArrayList<Donation>) {

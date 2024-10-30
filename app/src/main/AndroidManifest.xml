@@ -23,9 +23,6 @@
         <activity android:name=".RegisterActivity"
                   android:exported="true"/>
 
-        <activity
-            android:name=".home.views.MainActivity"  />
-
         <activity android:name=".home.views.LoginActivity"
             android:exported="true" />
 

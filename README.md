@@ -6,3 +6,12 @@
 * Splash screen + animação;
 * Incluir imagens do anúncio na home screen;
 * Tela de login;
+
+# 07/11/2024
+* imagens do anúncio
+  * upload a partir do device
+* integração total com Firebase
+  * armazenar imagens no storage
+  * armazenar credenciais
+* tela de contato com o anunciante
+* chat entre anunciante e interessado
