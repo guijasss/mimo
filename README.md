@@ -12,7 +12,7 @@
   * upload a partir do device
 * integração total com Firebase
   * armazenar imagens no storage
-  * armazenar credenciais
+  * armazenar credenciais ok
   * recuperar credenciais OK
 * tela de contato com o anunciante
 * chat entre anunciante e interessado

@@ -7,18 +7,21 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.unipampa.mimo.R
+import com.unipampa.mimo.RegisterActivity
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var usernameEditText: EditText
     private lateinit var passwordEditText: EditText
     private lateinit var loginButton: Button
     private lateinit var firestore: FirebaseFirestore
+    private lateinit var registerPrompt: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +36,12 @@ class LoginActivity : AppCompatActivity() {
             val username = usernameEditText.text.toString()
             val password = passwordEditText.text.toString()
             login(username, password)
+        }
+
+        registerPrompt = findViewById(R.id.register_prompt)
+        registerPrompt.setOnClickListener {
+            val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent) // Inicia a RegisterActivity
         }
     }
 
