@@ -21,4 +21,4 @@
 * atualizar lista de donations quando uma nova for criada
 * persistir o login quando o app for fechado
 * criar botão de Sair
-* 
+* contatar usuário

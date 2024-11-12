@@ -44,13 +44,8 @@ class CreateDonationAdActivity : AppCompatActivity() {
             val description = descriptionEditText.text.toString()
             val category = categorySpinner.selectedItem.toString()
 
-            println("CCCCCCCCCCCCCCCCCCCCCC")
-            println(title)
-            println(category)
-            println(description)
-
-            // Supondo que você tenha um nome de usuário no sistema (exemplo: UserName)
-            val userName = "admin" // Aqui você deveria pegar o nome do usuário logado
+            val sharedPreferences = getSharedPreferences("app_prefs", MODE_PRIVATE)
+            val username = sharedPreferences.getString("username", "default_name") // Recupera o nome do usuário
 
             // Inicializa o Retrofit para fazer a requisição HTTP
             val retrofit = Retrofit.Builder()
@@ -60,52 +55,48 @@ class CreateDonationAdActivity : AppCompatActivity() {
 
             val userApi = retrofit.create(UserApi::class.java)
 
-            // Faz a requisição para buscar o usuário
-            userApi.getUserByUsername(userName).enqueue(object : Callback<User> {
-                override fun onResponse(call: Call<User>, response: Response<User>) {
-                    if (response.isSuccessful) {
-                        val user = response.body()
+            if (username != null) {
+                userApi.getUserByUsername(username).enqueue(object : Callback<User> {
+                    override fun onResponse(call: Call<User>, response: Response<User>) {
+                        if (response.isSuccessful) {
+                            val user = response.body()
 
-                        if (user != null) {
-                            // Agora, crie a doação com o usuário
-                            val donation = Donation(
-                                id = UUID.randomUUID().toString(),
-                                title = title,
-                                description = description,
-                                category = category,
-                                creator = user
-                            )
+                            if (user != null) {
+                                val donation = Donation(
+                                    id = UUID.randomUUID().toString(),
+                                    title = title,
+                                    description = description,
+                                    category = category,
+                                    creator = user
+                                )
 
-                            // Salva a doação no Firestore
-                            val firestore = FirebaseFirestore.getInstance()
-                            firestore.collection("donation")
-                                .add(mapOf(
-                                    "id" to donation.id,
-                                    "title" to donation.title,
-                                    "description" to donation.description,
-                                    "category" to donation.category,
-                                    "user" to "/user/${user.id}"
-                                ))
-                                .addOnSuccessListener {
-                                    Toast.makeText(this@CreateDonationAdActivity, "Doação criada com sucesso!", Toast.LENGTH_SHORT).show()
-                                    finish() // Fecha a activity após salvar
-                                }
-                                .addOnFailureListener { e ->
-                                    Toast.makeText(this@CreateDonationAdActivity, "Erro ao criar doação: ${e.message}", Toast.LENGTH_SHORT).show()
-                                }
+                                val firestore = FirebaseFirestore.getInstance()
+                                firestore.collection("donation")
+                                    .add(mapOf(
+                                        "id" to donation.id,
+                                        "title" to donation.title,
+                                        "description" to donation.description,
+                                        "category" to donation.category,
+                                        "user" to "/user/${user.id}"
+                                    ))
+                                    .addOnSuccessListener {
+                                        Toast.makeText(this@CreateDonationAdActivity, "Doação criada com sucesso!", Toast.LENGTH_SHORT).show()
+                                        finish() // Fecha a activity após salvar
+                                    }
+                                    .addOnFailureListener { e ->
+                                        Toast.makeText(this@CreateDonationAdActivity, "Erro ao criar doação: ${e.message}", Toast.LENGTH_SHORT).show()
+                                    }
+                            }
+                        } else {
+                            Toast.makeText(this@CreateDonationAdActivity, "Erro ao buscar usuário", Toast.LENGTH_SHORT).show()
                         }
-                    } else {
-                        Toast.makeText(this@CreateDonationAdActivity, "Erro ao buscar usuário", Toast.LENGTH_SHORT).show()
                     }
-                }
 
-                override fun onFailure(call: Call<User>, t: Throwable) {
-                    println("AAAAAAAAAAAAAAAAAAAAAAA")
-                    println(t.message)
-                    println(t.cause)
-                    Toast.makeText(this@CreateDonationAdActivity, "Erro ao conectar com o servidor: ${t.message}", Toast.LENGTH_SHORT).show()
-                }
-            })
+                    override fun onFailure(call: Call<User>, t: Throwable) {
+                        Toast.makeText(this@CreateDonationAdActivity, "Erro ao conectar com o servidor", Toast.LENGTH_SHORT).show()
+                    }
+                })
+            }
         }
     }
 }
