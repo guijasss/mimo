@@ -61,7 +61,7 @@ class LoginActivity : AppCompatActivity() {
                     val document = querySnapshot.documents[0]
                     val storedPassword = document.getString("password")
                     if (storedPassword == hashedPassword) {
-                        saveAuthState()
+                        saveAuthState(username)
                         startActivity(Intent(this, MainActivity::class.java))
                         finish()
                     } else {
@@ -76,9 +76,12 @@ class LoginActivity : AppCompatActivity() {
             }
     }
 
-    private fun saveAuthState() {
+    private fun saveAuthState(username: String) {
         val sharedPreferences = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
-        sharedPreferences.edit().putBoolean("isAuthenticated", true).apply()
+        val editor = sharedPreferences.edit()
+        editor.putBoolean("isAuthenticated", true)
+        editor.putString("username", username)
+        editor.apply()
     }
 
     private fun hashPassword(password: String): String {
@@ -92,7 +95,7 @@ class LoginActivity : AppCompatActivity() {
         val userData = hashMapOf("username" to username, "password" to hashedPassword)
         firestore.collection("users").document(username).set(userData)
             .addOnSuccessListener {
-                saveAuthState()
+                saveAuthState(username)
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
             }

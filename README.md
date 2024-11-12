@@ -16,3 +16,9 @@
   * recuperar credenciais OK
 * tela de contato com o anunciante
 * chat entre anunciante e interessado
+
+# 14/11/2024
+* atualizar lista de donations quando uma nova for criada
+* persistir o login quando o app for fechado
+* criar botão de Sair
+* 

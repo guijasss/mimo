@@ -9,8 +9,8 @@ data class Donation(
     val category: String,
     val description: String,
     val id: String,
-    val title: String
-//    val requester: User
+    val title: String,
+    val creator: User
 ) : Parcelable {
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
@@ -18,8 +18,8 @@ data class Donation(
         parcel.readString() ?: "",
         parcel.readString() ?: "",
         parcel.readString() ?: "",
-        parcel.readString() ?: ""
-//        parcel.readParcelable(User::class.java.classLoader, User::class.java) ?: User("", "", "", "", "", arrayListOf())    )
+        parcel.readString() ?: "",
+        parcel.readParcelable(User::class.java.classLoader, User::class.java) ?: User("", "", "", "", "", "")
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -27,7 +27,7 @@ data class Donation(
         parcel.writeString(title)
         parcel.writeString(description)
         parcel.writeString(category)
-//        parcel.writeParcelable(requester, flags)
+        parcel.writeParcelable(creator, flags)
     }
 
     override fun describeContents(): Int {
