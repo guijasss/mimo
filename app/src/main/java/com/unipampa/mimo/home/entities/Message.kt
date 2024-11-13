@@ -7,5 +7,6 @@ data class Message(
     val recipient: String = "",
     val sender: String = "",
     val timestamp: Timestamp = Timestamp.now(),
-    val donation: String = ""
+    val chatId: String = "",
+    val donationId: String
 )

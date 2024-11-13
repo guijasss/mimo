@@ -48,11 +48,6 @@ class MainActivity : AppCompatActivity(), HomeContracts.View {
         donationAdapter = DonationAdapter { donation ->
             val intent = Intent(this, ChatActivity::class.java)
 
-            println("SEXOOOOOOOOOOO")
-            println(donation.id)
-            println(donation.creator!!.id)
-            println(currentUserId)
-
             intent.putExtra("donationId", donation.id)
             intent.putExtra("recipient", donation.creator!!.id)
             intent.putExtra("sender", currentUserId)
