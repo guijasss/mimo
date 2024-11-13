@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.FirebaseApp
-import com.google.firebase.firestore.DocumentReference
 import com.unipampa.mimo.R
 import com.unipampa.mimo.home.HomeContracts
 import com.unipampa.mimo.home.adapters.CategoryAdapter
@@ -112,8 +111,8 @@ class MainActivity : AppCompatActivity(), HomeContracts.View {
         if (requestCode == CREATE_DONATION_REQUEST && resultCode == RESULT_OK) {
             val donation: Donation? = data?.getParcelableExtra(DONATION_EXTRA)
             if (donation != null) {
-                donationsList.add(donation) // Adiciona a nova doação à lista
-                donationAdapter.notifyItemInserted(donationsList.size - 1) // Notifica o adapter
+                donationsList.add(0, donation)  // Adiciona a nova doação no início da lista
+                donationAdapter.notifyItemInserted(0)  // Notifica o adapter de que um item foi adicionado
                 Toast.makeText(this, "Doação criada: ${donation.title}", Toast.LENGTH_SHORT).show()
             }
         }

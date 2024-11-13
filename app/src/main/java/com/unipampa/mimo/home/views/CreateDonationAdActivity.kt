@@ -1,5 +1,6 @@
 package com.unipampa.mimo.home.views
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -80,6 +81,10 @@ class CreateDonationAdActivity : AppCompatActivity() {
                                     ))
                                     .addOnSuccessListener {
                                         Toast.makeText(this@CreateDonationAdActivity, "Doação criada com sucesso!", Toast.LENGTH_SHORT).show()
+                                        val intent = Intent().apply {
+                                            putExtra(MainActivity.DONATION_EXTRA, donation)  // Passa a nova doação
+                                        }
+                                        setResult(RESULT_OK, intent)
                                         finish() // Fecha a activity após salvar
                                     }
                                     .addOnFailureListener { e ->

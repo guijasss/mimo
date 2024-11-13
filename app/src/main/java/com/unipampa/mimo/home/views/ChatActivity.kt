@@ -8,13 +8,13 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.unipampa.mimo.R
 import com.unipampa.mimo.home.adapters.MessageAdapter
 import com.unipampa.mimo.home.entities.Chat
 import com.unipampa.mimo.home.entities.Message
+import com.unipampa.mimo.home.helpers.Datetime
 import com.unipampa.mimo.home.helpers.Hash
 
 
@@ -88,7 +88,7 @@ class ChatActivity : AppCompatActivity() {
                 message = messageText,
                 sender = sender,
                 recipient = recipient,
-                timestamp = Timestamp.now(),
+                timestamp = Datetime.getCurrentDatetime(),
                 // isso garante que o id do chat sempre será o mesmo
                 donationId = donationId,
                 chatId = chatId
@@ -109,7 +109,7 @@ class ChatActivity : AppCompatActivity() {
                 id = chatId,
                 sender = sender,
                 recipient = recipient,
-                createdAt = Timestamp.now(),
+                createdAt = Datetime.getCurrentDatetime(),
                 lastMessage = messageText
             )
 
