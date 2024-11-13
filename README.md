@@ -21,8 +21,9 @@
 * atualizar lista de donations quando uma nova for criada
 * persistir o login quando o app for fechado
 * criar botão de Sair
-* contatar usuário
+* contatar usuário OK
     * retornar dados do usuário na requisição de Donation OK
     * usuário logado OK 
     * usuário que fez a doação OK
+* listar chats
 * filtrar apenas as doações que não foram feitas pelo usuário logado

@@ -3,6 +3,8 @@ package com.unipampa.mimo.home.views
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -115,6 +117,21 @@ class MainActivity : AppCompatActivity(), HomeContracts.View {
                 donationAdapter.notifyItemInserted(0)  // Notifica o adapter de que um item foi adicionado
                 Toast.makeText(this, "Doação criada: ${donation.title}", Toast.LENGTH_SHORT).show()
             }
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main, menu) // Inflando o layout do menu
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_messages -> { // ID do ícone de mensagens
+                startActivity(Intent(this, ChatListActivity::class.java))
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 

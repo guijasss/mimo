@@ -8,6 +8,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.firestore.Filter
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.unipampa.mimo.R
@@ -109,12 +110,19 @@ class ChatActivity : AppCompatActivity() {
                 id = chatId,
                 sender = sender,
                 recipient = recipient,
+                donation = donationId,
                 createdAt = Datetime.getCurrentDatetime(),
                 lastMessage = messageText
             )
 
             val chatQuery = firestore.collection("chat")
-                .whereEqualTo("sender", sender)
+                .where(
+                    Filter.and(
+                        Filter.equalTo("sender", chat.sender),
+                        Filter.equalTo("recipient", chat.recipient),
+                        Filter.equalTo("donationId", chat.donation)
+                    )
+                )
 
             chatQuery.get().addOnCompleteListener { task ->
                 if (task.isSuccessful) {
@@ -122,14 +130,13 @@ class ChatActivity : AppCompatActivity() {
                     if (querySnapshot != null && !querySnapshot.isEmpty) {
                         println("OK")
                     } else {
-                        // O chat não existe, então criamos um novo
                         firestore.collection("chat")
                             .add(chat)
                             .addOnSuccessListener {
-                                messageInput.text.clear() // Limpa o campo de entrada de texto
+                                messageInput.text.clear()
                             }
                             .addOnFailureListener { e ->
-                                e.printStackTrace() // Lida com falhas no envio
+                                e.printStackTrace()
                             }
                     }
                 } else {

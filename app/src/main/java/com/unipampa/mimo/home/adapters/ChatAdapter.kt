@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.unipampa.mimo.R
 import com.unipampa.mimo.home.entities.Chat
 
-// Adapter para exibir a lista de chats
+
 class ChatAdapter(private val onChatClick: (Chat) -> Unit) :
     ListAdapter<Chat, ChatAdapter.ChatViewHolder>(ChatDiffCallback()) {
 
