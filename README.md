@@ -22,3 +22,6 @@
 * persistir o login quando o app for fechado
 * criar botão de Sair
 * contatar usuário
+    * retornar dados do usuário na requisição de Donation
+    * usuário logado
+    * usuário que fez a doação

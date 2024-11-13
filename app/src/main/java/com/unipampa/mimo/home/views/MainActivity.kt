@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.FirebaseApp
+import com.google.firebase.firestore.DocumentReference
 import com.unipampa.mimo.R
 import com.unipampa.mimo.home.HomeContracts
 import com.unipampa.mimo.home.adapters.CategoryAdapter
@@ -37,11 +38,26 @@ class MainActivity : AppCompatActivity(), HomeContracts.View {
             return
         }
 
+        val sharedPreferences = getSharedPreferences("app_prefs", MODE_PRIVATE)
+        val currentUserId = sharedPreferences.getString("currentUserId", "default_name")
+
         FirebaseApp.initializeApp(this)
         setContentView(R.layout.activity_main)
 
         recyclerView = findViewById(R.id.recycler_view_anuncios)
-        donationAdapter = DonationAdapter()
+        donationAdapter = DonationAdapter { donation ->
+            val intent = Intent(this, ChatActivity::class.java)
+
+            println("SEXOOOOOOOOOOO")
+            println(donation.id)
+            println(donation.creator!!.id)
+            println(currentUserId)
+
+            intent.putExtra("donationId", donation.id)
+            intent.putExtra("recipient", donation.creator!!.id)
+            intent.putExtra("sender", currentUserId)
+            startActivity(intent)
+        }
         recyclerView.adapter = donationAdapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 

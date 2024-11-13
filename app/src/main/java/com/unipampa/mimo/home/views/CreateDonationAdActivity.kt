@@ -1,6 +1,5 @@
 package com.unipampa.mimo.home.views
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -19,7 +18,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 import java.util.UUID
-import kotlin.math.ln
 
 interface UserApi {
     @GET("users") // O endpoint agora é só "users", o parâmetro será passado via query
@@ -67,6 +65,7 @@ class CreateDonationAdActivity : AppCompatActivity() {
                                     title = title,
                                     description = description,
                                     category = category,
+                                    creatorId = user.id,
                                     creator = user
                                 )
 
@@ -77,7 +76,7 @@ class CreateDonationAdActivity : AppCompatActivity() {
                                         "title" to donation.title,
                                         "description" to donation.description,
                                         "category" to donation.category,
-                                        "user" to "/user/${user.id}"
+                                        "creatorId" to "/user/${user.id}"
                                     ))
                                     .addOnSuccessListener {
                                         Toast.makeText(this@CreateDonationAdActivity, "Doação criada com sucesso!", Toast.LENGTH_SHORT).show()

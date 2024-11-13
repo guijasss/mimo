@@ -20,10 +20,13 @@
             android:name=".home.views.CreateDonationAdActivity"
             android:exported="false" />
 
-        <activity android:name=".RegisterActivity"
+        <activity android:name=".home.views.RegisterActivity"
                   android:exported="true"/>
 
         <activity android:name=".home.views.LoginActivity"
+            android:exported="true" />
+
+        <activity android:name=".home.views.ChatActivity"
             android:exported="true" />
 
         <activity android:name=".home.views.MainActivity"

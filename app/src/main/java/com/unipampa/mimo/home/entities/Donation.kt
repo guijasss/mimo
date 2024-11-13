@@ -9,12 +9,14 @@ data class Donation(
     val category: String,
     val description: String,
     val id: String,
+    val creatorId: String,
     val title: String,
-    val creator: User
+    var creator: User?
 ) : Parcelable {
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     constructor(parcel: Parcel) : this(
+        parcel.readString() ?: "",
         parcel.readString() ?: "",
         parcel.readString() ?: "",
         parcel.readString() ?: "",

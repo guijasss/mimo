@@ -1,4 +1,4 @@
-package com.unipampa.mimo
+package com.unipampa.mimo.home.views
 
 import android.os.Bundle
 import android.util.Base64

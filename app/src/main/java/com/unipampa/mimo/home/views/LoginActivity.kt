@@ -14,7 +14,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.unipampa.mimo.R
-import com.unipampa.mimo.RegisterActivity
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var usernameEditText: EditText
@@ -59,9 +58,11 @@ class LoginActivity : AppCompatActivity() {
             .addOnSuccessListener { querySnapshot ->
                 if (!querySnapshot.isEmpty) {
                     val document = querySnapshot.documents[0]
+                    val currentUserId = document.id
+
                     val storedPassword = document.getString("password")
                     if (storedPassword == hashedPassword) {
-                        saveAuthState(username)
+                        saveAuthState(currentUserId, username)
                         startActivity(Intent(this, MainActivity::class.java))
                         finish()
                     } else {
@@ -76,10 +77,11 @@ class LoginActivity : AppCompatActivity() {
             }
     }
 
-    private fun saveAuthState(username: String) {
+    private fun saveAuthState(id: String, username: String) {
         val sharedPreferences = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         editor.putBoolean("isAuthenticated", true)
+        editor.putString("currentUserId", id)
         editor.putString("username", username)
         editor.apply()
     }
@@ -88,19 +90,5 @@ class LoginActivity : AppCompatActivity() {
         val messageDigest = MessageDigest.getInstance("SHA-1")
         val hashedBytes = messageDigest.digest(password.toByteArray())
         return Base64.encodeToString(hashedBytes, Base64.DEFAULT).trim()
-    }
-
-    private fun register(username: String, password: String) {
-        val hashedPassword = hashPassword(password)
-        val userData = hashMapOf("username" to username, "password" to hashedPassword)
-        firestore.collection("users").document(username).set(userData)
-            .addOnSuccessListener {
-                saveAuthState(username)
-                startActivity(Intent(this, MainActivity::class.java))
-                finish()
-            }
-            .addOnFailureListener { exception ->
-                Toast.makeText(this, "Erro ao registrar usuário: ${exception.message}", Toast.LENGTH_SHORT).show()
-            }
     }
 }
