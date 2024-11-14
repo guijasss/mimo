@@ -7,6 +7,7 @@
     android:padding="16dp"
     tools:context=".home.views.CreateDonationAdActivity">
 
+    <!-- Título da página -->
     <TextView
         android:id="@+id/page_title"
         android:layout_width="wrap_content"
@@ -19,6 +20,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Subtítulo da página -->
     <TextView
         android:id="@+id/page_subtitle"
         android:layout_width="wrap_content"
@@ -30,6 +32,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/page_title" />
 
+    <!-- Título para o campo Título da Doação -->
     <TextView
         android:id="@+id/title_label"
         android:layout_width="wrap_content"
@@ -42,6 +45,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/page_subtitle" />
 
+    <!-- Campo de texto para o título da doação -->
     <EditText
         android:id="@+id/donation_title"
         android:layout_width="0dp"
@@ -54,6 +58,7 @@
         android:layout_marginTop="8dp"
         android:background="@android:color/transparent"/>
 
+    <!-- Título para o campo Descrição da Doação -->
     <TextView
         android:id="@+id/description_label"
         android:layout_width="wrap_content"
@@ -66,6 +71,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/donation_title" />
 
+    <!-- Campo de texto para a descrição da doação -->
     <EditText
         android:id="@+id/donation_description"
         android:layout_width="0dp"
@@ -80,6 +86,7 @@
         android:layout_marginTop="8dp"
         android:background="@android:color/transparent"/>
 
+    <!-- Título para o campo Categoria -->
     <TextView
         android:id="@+id/category_label"
         android:layout_width="wrap_content"
@@ -92,6 +99,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/donation_description" />
 
+    <!-- Spinner para selecionar a categoria -->
     <Spinner
         android:id="@+id/donation_category"
         android:layout_width="0dp"
@@ -102,15 +110,54 @@
         android:layout_marginTop="8dp"
         android:entries="@array/categories_array" />
 
+    <!-- Título para o campo de Imagem -->
+    <TextView
+        android:id="@+id/image_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Imagem da Doação"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/donation_category" />
+
+    <!-- Visualizador de Imagem -->
+    <ImageView
+    android:id="@+id/donation_image"
+    android:layout_width="0dp"
+    android:layout_height="200dp"
+    android:layout_marginTop="32dp"
+    android:contentDescription="Imagem da Doação"
+    android:scaleType="centerCrop"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="1.0"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/image_label" />
+
+    <!-- Botão para Selecionar Imagem -->
+    <Button
+        android:id="@+id/select_image_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Selecionar Imagem"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.63"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/donation_image" />
+
+    <!-- Botão para Criar Doação -->
     <Button
         android:id="@+id/create_donation_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Criar Doação"
+        android:layout_marginTop="16dp"
         app:backgroundTint="@color/colorButtons"
-        app:layout_constraintTop_toBottomOf="@id/donation_category"
+        app:layout_constraintTop_toBottomOf="@id/select_image_button"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="32dp"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

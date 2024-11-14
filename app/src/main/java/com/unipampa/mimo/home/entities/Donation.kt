@@ -9,12 +9,14 @@ data class Donation(
     val category: String,
     val description: String,
     val id: String,
-    val title: String
+    val title: String,
+    val imageUrl: String? = null
 //    val requester: User
 ) : Parcelable {
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     constructor(parcel: Parcel) : this(
+        parcel.readString() ?: "",
         parcel.readString() ?: "",
         parcel.readString() ?: "",
         parcel.readString() ?: "",
@@ -27,6 +29,7 @@ data class Donation(
         parcel.writeString(title)
         parcel.writeString(description)
         parcel.writeString(category)
+        parcel.writeString(imageUrl)
 //        parcel.writeParcelable(requester, flags)
     }
 

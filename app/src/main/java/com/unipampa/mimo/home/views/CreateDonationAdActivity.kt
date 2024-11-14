@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -13,6 +14,8 @@ import com.unipampa.mimo.R
 import com.unipampa.mimo.home.entities.Donation
 
 class CreateDonationAdActivity : AppCompatActivity() {
+
+    private val SELECT_IMAGE_REQUEST = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +26,13 @@ class CreateDonationAdActivity : AppCompatActivity() {
         val descriptionEditText = findViewById<EditText>(R.id.donation_description)
         val categorySpinner = findViewById<Spinner>(R.id.donation_category)
         val createButton = findViewById<Button>(R.id.create_donation_button)
+        val selectImageButton = findViewById<Button>(R.id.select_image_button)
+
+        selectImageButton.setOnClickListener {
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.type = "image/*"
+            startActivityForResult(intent, SELECT_IMAGE_REQUEST)
+        }
 
         createButton.setOnClickListener {
             val title = titleEditText.text.toString()
