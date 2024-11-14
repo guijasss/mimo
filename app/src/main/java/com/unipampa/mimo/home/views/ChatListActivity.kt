@@ -35,15 +35,17 @@ class ChatListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_list)
 
-        // Configurar RecyclerView e Adapter
-        recyclerView = findViewById(R.id.recycler_view_chats)
-        chatAdapter = ChatAdapter { chat -> openChat(chat) }
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = chatAdapter
-
         firestore = FirebaseFirestore.getInstance()
         val sharedPreferences = getSharedPreferences("app_prefs", MODE_PRIVATE)
         currentUserId = sharedPreferences.getString("currentUserId", "") ?: ""
+
+        // Configurar RecyclerView e Adapter
+        recyclerView = findViewById(R.id.recycler_view_chats)
+        chatAdapter = ChatAdapter {chat -> openChat(chat) }
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = chatAdapter
+
+        chatAdapter.setCurrentUser(currentUserId)
 
         loadChats(currentUserId)
     }

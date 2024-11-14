@@ -105,10 +105,7 @@ class ChatActivity : AppCompatActivity() {
                 .addOnSuccessListener {
                     messageInput.text.clear() // Limpa o campo de entrada de texto
                     loadMessages()
-                    messagesRecyclerView.post {
-                        // Rolar para a última mensagem após enviar
-                        messagesRecyclerView.smoothScrollToPosition(messageAdapter.itemCount - 1)
-                    }                }
+                }
                 .addOnFailureListener { e ->
                     e.printStackTrace() // Lida com falhas no envio
                 }
