@@ -48,6 +48,11 @@ class ChatListActivity : AppCompatActivity() {
         loadChats(currentUserId)
     }
 
+    override fun onResume() {
+        super.onResume()
+        loadChats(currentUserId)
+    }
+
     private fun loadChats(username: String) {
         val retrofit = RetrofitClient.build()
         val chatApi = retrofit.create(ChatsApi::class.java)

@@ -46,6 +46,11 @@ class ChatActivity : AppCompatActivity() {
         messagesRecyclerView.layoutManager = LinearLayoutManager(this)
         messagesRecyclerView.adapter = messageAdapter
 
+        val layoutManager = LinearLayoutManager(this)
+        layoutManager.stackFromEnd = true // Faz o RecyclerView começar de baixo
+        messagesRecyclerView.layoutManager = layoutManager
+        messagesRecyclerView.adapter = messageAdapter
+
         // Configurando o botão de enviar e campo de entrada de mensagem
         sendButton = findViewById(R.id.button_send)
         messageInput = findViewById(R.id.input_message)
@@ -100,7 +105,10 @@ class ChatActivity : AppCompatActivity() {
                 .addOnSuccessListener {
                     messageInput.text.clear() // Limpa o campo de entrada de texto
                     loadMessages()
-                }
+                    messagesRecyclerView.post {
+                        // Rolar para a última mensagem após enviar
+                        messagesRecyclerView.smoothScrollToPosition(messageAdapter.itemCount - 1)
+                    }                }
                 .addOnFailureListener { e ->
                     e.printStackTrace() // Lida com falhas no envio
                 }
