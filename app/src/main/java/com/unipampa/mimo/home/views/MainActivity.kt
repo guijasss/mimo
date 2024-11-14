@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -41,9 +42,12 @@ class MainActivity : AppCompatActivity(), HomeContracts.View {
 
         val sharedPreferences = getSharedPreferences("app_prefs", MODE_PRIVATE)
         val currentUserId = sharedPreferences.getString("currentUserId", "default_name")
+        val currentUserName = sharedPreferences.getString("name", "default_name")
 
         FirebaseApp.initializeApp(this)
         setContentView(R.layout.activity_main)
+
+        findViewById<TextView>(R.id.user_name_text).text = currentUserName
 
         recyclerView = findViewById(R.id.recycler_view_anuncios)
         donationAdapter = DonationAdapter { donation ->

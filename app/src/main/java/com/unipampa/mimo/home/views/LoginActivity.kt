@@ -59,10 +59,11 @@ class LoginActivity : AppCompatActivity() {
                 if (!querySnapshot.isEmpty) {
                     val document = querySnapshot.documents[0]
                     val currentUserId = document.id
+                    val name: String = document.getString("name").toString()
 
                     val storedPassword = document.getString("password")
                     if (storedPassword == hashedPassword) {
-                        saveAuthState(currentUserId, username)
+                        saveAuthState(currentUserId, username, name)
                         startActivity(Intent(this, MainActivity::class.java))
                         finish()
                     } else {
@@ -77,12 +78,13 @@ class LoginActivity : AppCompatActivity() {
             }
     }
 
-    private fun saveAuthState(id: String, username: String) {
+    private fun saveAuthState(id: String, username: String, name: String) {
         val sharedPreferences = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         editor.putBoolean("isAuthenticated", true)
         editor.putString("currentUserId", id)
         editor.putString("username", username)
+        editor.putString("name", name)
         editor.apply()
     }
 
