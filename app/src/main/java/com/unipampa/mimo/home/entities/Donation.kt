@@ -20,8 +20,8 @@ data class Donation(
         parcel.readString() ?: "",
         parcel.readString() ?: "",
         parcel.readString() ?: "",
-        parcel.readString() ?: ""
-//        parcel.readParcelable(User::class.java.classLoader, User::class.java) ?: User("", "", "", "", "", arrayListOf())    )
+        parcel.readString() ?: "",
+       //parcel.readParcelable(User::class.java.classLoader, User::class.java) ?: User("", "", "", "", "", arrayListOf())    )
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
