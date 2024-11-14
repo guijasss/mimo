@@ -131,8 +131,26 @@ class MainActivity : AppCompatActivity(), HomeContracts.View {
                 startActivity(Intent(this, ChatListActivity::class.java))
                 true
             }
+            R.id.action_logout -> {
+                // Lógica do botão de logout
+                handleLogout()
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun handleLogout() {
+        // Apagar o valor de "isAuthenticated" para false nas SharedPreferences
+        val sharedPreferences = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putBoolean("isAuthenticated", false) // Definir como false
+        editor.apply()
+
+        // Redirecionar para a tela de login
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+        finish() // Opcional, para finalizar a MainActivity e não permitir voltar
     }
 
     companion object {

@@ -30,3 +30,5 @@
 * no backend enriqueci as informações de user no chat, consumir isso na listagem
   * atualizar a lastMessage quando a mensagem for enviadas
   * adicionar informações do donation no header da tela de mensagens
+* mudar a lógica de nome mostrado no ChatList
+  * se current_user = sender, mostra o recipient, e vice versa
