@@ -85,6 +85,7 @@ class ChatListActivity : AppCompatActivity() {
         intent.putExtra("donationId", chat.donation)
         intent.putExtra("recipient", chat.recipient)
         intent.putExtra("sender", chat.sender)
+        intent.putExtra("currentUserId", currentUserId)
         startActivity(intent)
     }
 }

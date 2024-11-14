@@ -27,6 +27,7 @@ class ChatActivity : AppCompatActivity() {
     private lateinit var messageInput: EditText
     private lateinit var sender: String
     private lateinit var recipient: String
+    private lateinit var currentUserId: String
     private lateinit var donationId: String
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
@@ -36,10 +37,13 @@ class ChatActivity : AppCompatActivity() {
 
         // Inicializando Firestore e referências
         firestore = FirebaseFirestore.getInstance()
-        sender = intent.getParcelableExtra("sender", String::class.java)!! // Defina o ID do usuário atual
-        recipient = intent.getParcelableExtra("recipient", String::class.java)!! // Recebe a referência do destinatário
-        donationId = intent.getParcelableExtra("donationId", String::class.java)!! // Recebe a referência da doação
+        donationId = intent.getStringExtra("donationId")!! // Recebe a referência da doação
+        recipient = intent.getStringExtra("recipient")!! // Recebe a referência do destinatário
+        sender = intent.getStringExtra("sender")!! // Defina o ID do usuário atual
+        currentUserId = intent.getStringExtra("currentUserId")!!
 
+        println("ACTIVITY")
+        println(intent.getStringExtra("sender"))
         // Configurando o RecyclerView e o Adapter
         messagesRecyclerView = findViewById(R.id.recycler_view_messages)
         messageAdapter = MessageAdapter(sender)

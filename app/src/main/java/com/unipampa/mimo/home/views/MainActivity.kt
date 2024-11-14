@@ -42,6 +42,7 @@ class MainActivity : AppCompatActivity(), HomeContracts.View {
 
         val sharedPreferences = getSharedPreferences("app_prefs", MODE_PRIVATE)
         val currentUserId = sharedPreferences.getString("currentUserId", "default_name")
+
         val currentUserName = sharedPreferences.getString("name", "default_name")
 
         FirebaseApp.initializeApp(this)
@@ -56,6 +57,7 @@ class MainActivity : AppCompatActivity(), HomeContracts.View {
             intent.putExtra("donationId", donation.id)
             intent.putExtra("recipient", donation.creator!!.id)
             intent.putExtra("sender", currentUserId)
+            intent.putExtra("currentUserId", currentUserId)
             startActivity(intent)
         }
         recyclerView.adapter = donationAdapter
