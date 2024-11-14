@@ -27,3 +27,6 @@
     * usuário que fez a doação OK
 * listar chats
 * filtrar apenas as doações que não foram feitas pelo usuário logado
+* no backend enriqueci as informações de user no chat, consumir isso na listagem
+  * atualizar a lastMessage quando a mensagem for enviadas
+  * adicionar informações do donation no header da tela de mensagens
