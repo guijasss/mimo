@@ -77,6 +77,7 @@ class CreateDonationAdActivity : AppCompatActivity() {
                                         "title" to donation.title,
                                         "description" to donation.description,
                                         "category" to donation.category,
+                                        "creator" to donation.creator,
                                         "creatorId" to "/user/${user.id}"
                                     ))
                                     .addOnSuccessListener {

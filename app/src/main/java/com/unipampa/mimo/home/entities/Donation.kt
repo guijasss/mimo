@@ -25,10 +25,11 @@ data class Donation(
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(id)
-        parcel.writeString(title)
-        parcel.writeString(description)
         parcel.writeString(category)
+        parcel.writeString(description)
+        parcel.writeString(id)
+        parcel.writeString(creatorId)
+        parcel.writeString(title)
         parcel.writeParcelable(creator, flags)
     }
 

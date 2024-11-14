@@ -38,8 +38,8 @@ class DonationViewHolder(
     private val contactButton: Button = itemView.findViewById(R.id.contatar_button)
 
     fun bind(ad: Donation) {
-        nameTextView.text = "Maria da Silva"
-        locationTextView.text = "Alegrete" // concat com estado
+        nameTextView.text = ad.creator!!.name
+        locationTextView.text = ad.creator!!.city // concat com estado
         categoryTextView.text = ad.category
         titleTextView.text = ad.title
         descriptionTextView.text = ad.description
