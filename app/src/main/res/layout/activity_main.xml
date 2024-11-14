@@ -7,6 +7,47 @@
     android:padding="16dp"
     tools:context=".home.views.MainActivity">
 
+    <!-- Texto de boas-vindas ao usuário -->
+    <TextView
+        android:id="@+id/welcome_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bem-vindo, "
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimary"
+        android:layout_marginTop="24dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:paddingStart="16dp"
+        tools:text="Bem-vindo, "/>
+
+    <!-- Nome do usuário em negrito -->
+    <TextView
+        android:id="@+id/user_name_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Usuário"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimary"
+        android:layout_marginTop="24dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/welcome_text"
+        android:paddingStart="4dp"
+        tools:text="Usuário" />
+
+    <!-- Divider entre o texto de boas-vindas e a barra de pesquisa -->
+    <View
+        android:id="@+id/divider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintTop_toBottomOf="@id/welcome_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Barra de busca -->
     <EditText
         android:id="@+id/search_bar"
         android:layout_width="0dp"
@@ -17,12 +58,13 @@
         android:drawablePadding="8dp"
         android:background="@drawable/search_background"
         android:elevation="4dp"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/divider"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="16dp"
-        android:layout_marginTop="64dp" />
+        android:layout_marginTop="16dp" />
 
+    <!-- Título de categorias populares -->
     <TextView
         android:id="@+id/categorias_title"
         android:layout_width="wrap_content"
@@ -35,8 +77,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-
-    <!-- RecyclerView for Horizontal Sliding Categories -->
+    <!-- RecyclerView de categorias horizontais -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_categories"
         android:layout_width="0dp"
@@ -49,7 +90,7 @@
         android:orientation="horizontal"
         tools:listitem="@layout/item_category" />
 
-    <!-- RecyclerView for Donations -->
+    <!-- RecyclerView para doações -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_anuncios"
         android:layout_width="0dp"
@@ -61,6 +102,7 @@
         android:layout_marginTop="16dp"
         tools:listitem="@layout/item_donation" />
 
+    <!-- Botão flutuante de ação para adicionar doação -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/button_create_donation_ad"
         android:layout_width="wrap_content"
@@ -73,5 +115,4 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:tint="@android:color/white"/>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

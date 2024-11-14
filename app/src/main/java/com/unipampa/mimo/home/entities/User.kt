@@ -5,29 +5,30 @@ import android.os.Parcelable
 
 
 data class User(
+    val id: String,
     val name: String,
+    val address: String,
     val city: String,
-    val state: String,
-    val profilePicture: String,
     val username: String,
-    val phoneNumbers: ArrayList<String>
-) : Parcelable {
+    val password: String
+    ) : Parcelable {
+
     constructor(parcel: Parcel) : this(
         parcel.readString() ?: "",
         parcel.readString() ?: "",
         parcel.readString() ?: "",
         parcel.readString() ?: "",
         parcel.readString() ?: "",
-        parcel.createStringArrayList() ?: ArrayList()
+        parcel.readString() ?: ""
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(name)
         parcel.writeString(city)
-        parcel.writeString(state)
-        parcel.writeString(profilePicture)
+        parcel.writeString(id)
+        parcel.writeString(address)
         parcel.writeString(username)
-        parcel.writeStringList(phoneNumbers)
+        parcel.writeString(password)
     }
 
     override fun describeContents(): Int {

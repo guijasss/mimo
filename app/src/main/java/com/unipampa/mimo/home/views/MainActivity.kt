@@ -3,6 +3,9 @@ package com.unipampa.mimo.home.views
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -37,11 +40,24 @@ class MainActivity : AppCompatActivity(), HomeContracts.View {
             return
         }
 
+        val sharedPreferences = getSharedPreferences("app_prefs", MODE_PRIVATE)
+        val currentUserId = sharedPreferences.getString("currentUserId", "default_name")
+
+        val currentUserName = sharedPreferences.getString("name", "default_name")
+
         FirebaseApp.initializeApp(this)
         setContentView(R.layout.activity_main)
 
+        findViewById<TextView>(R.id.user_name_text).text = currentUserName
+
         recyclerView = findViewById(R.id.recycler_view_anuncios)
-        donationAdapter = DonationAdapter()
+        donationAdapter = DonationAdapter { donation ->
+            val intent = Intent(this, ChatActivity::class.java)
+            intent.putExtra("donationId", donation.id)
+            intent.putExtra("donationCreatorId", donation.creator?.id)
+            intent.putExtra("currentUserId", currentUserId)
+            startActivity(intent)
+        }
         recyclerView.adapter = donationAdapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
@@ -101,11 +117,44 @@ class MainActivity : AppCompatActivity(), HomeContracts.View {
         if (requestCode == CREATE_DONATION_REQUEST && resultCode == RESULT_OK) {
             val donation: Donation? = data?.getParcelableExtra(DONATION_EXTRA)
             if (donation != null) {
-                donationsList.add(donation) // Adiciona a nova doação à lista
-                donationAdapter.notifyItemInserted(donationsList.size - 1) // Notifica o adapter
+                donationsList.add(0, donation)  // Adiciona a nova doação no início da lista
+                donationAdapter.notifyItemInserted(0)  // Notifica o adapter de que um item foi adicionado
                 Toast.makeText(this, "Doação criada: ${donation.title}", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main, menu) // Inflando o layout do menu
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_messages -> { // ID do ícone de mensagens
+                startActivity(Intent(this, ChatListActivity::class.java))
+                true
+            }
+            R.id.action_logout -> {
+                // Lógica do botão de logout
+                handleLogout()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun handleLogout() {
+        // Apagar o valor de "isAuthenticated" para false nas SharedPreferences
+        val sharedPreferences = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putBoolean("isAuthenticated", false) // Definir como false
+        editor.apply()
+
+        // Redirecionar para a tela de login
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+        finish() // Opcional, para finalizar a MainActivity e não permitir voltar
     }
 
     companion object {
