@@ -8,7 +8,6 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.firestore.Filter
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.unipampa.mimo.R
@@ -115,35 +114,44 @@ class ChatActivity : AppCompatActivity() {
                 lastMessage = messageText
             )
 
-            val chatQuery = firestore.collection("chat")
-                .where(
-                    Filter.and(
-                        Filter.equalTo("sender", chat.sender),
-                        Filter.equalTo("recipient", chat.recipient),
-                        Filter.equalTo("donationId", chat.donation)
-                    )
-                )
-
-            chatQuery.get().addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    val querySnapshot = task.result
-                    if (querySnapshot != null && !querySnapshot.isEmpty) {
-                        println("OK")
+            firestore.collection("chat").whereEqualTo("id", chat.id).get()
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val querySnapshot = task.result
+                        if (querySnapshot != null && !querySnapshot.isEmpty) {
+                            val document = querySnapshot.documents[0]
+                            document.reference.update("lastMessage", chat.lastMessage)
+                                .addOnSuccessListener {
+                                    println("Campo lastMessage atualizado com sucesso.")
+                                }
+                                .addOnFailureListener { e ->
+                                    e.printStackTrace()
+                                }
+                        } else {
+                            // Cria o chat apenas se ele não existe
+                            firestore.collection("chat")
+                                .document(chatId) // Usa o chatId como ID do documento
+                                .set(mapOf(
+                                    "id" to chat.id,
+                                    "sender" to chat.sender,
+                                    "recipient" to chat.recipient,
+                                    "donation" to chat.donation,
+                                    "createdAt" to chat.createdAt,
+                                    "lastMessage" to chat.lastMessage
+                                ))
+                                .addOnSuccessListener {
+                                    messageInput.text.clear()
+                                    println("Chat criado com sucesso.")
+                                }
+                                .addOnFailureListener { e ->
+                                    e.printStackTrace()
+                                }
+                        }
                     } else {
-                        firestore.collection("chat")
-                            .add(chat)
-                            .addOnSuccessListener {
-                                messageInput.text.clear()
-                            }
-                            .addOnFailureListener { e ->
-                                e.printStackTrace()
-                            }
+                        // Tratar falha ao verificar a existência do documento
+                        task.exception?.printStackTrace()
                     }
-                } else {
-                    // Tratar falha ao verificar a coleção
-                    task.exception?.printStackTrace()
                 }
-            }
         }
     }
 }

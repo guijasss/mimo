@@ -2,7 +2,6 @@ package com.unipampa.mimo.home.interactors
 
 import com.unipampa.mimo.home.HomeContracts
 import com.unipampa.mimo.home.entities.Donation
-import com.unipampa.mimo.home.entities.User
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

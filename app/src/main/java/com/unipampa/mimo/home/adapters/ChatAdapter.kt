@@ -34,7 +34,7 @@ class ChatAdapter(private val onChatClick: (Chat) -> Unit) :
         private val lastMessageTextView: TextView = itemView.findViewById(R.id.chat_last_message)
 
         fun bind(chat: Chat) {
-            userNameTextView.text = chat.sender
+            userNameTextView.text = chat.recipientData?.name ?: "AA"
             lastMessageTextView.text = chat.lastMessage
         }
     }
