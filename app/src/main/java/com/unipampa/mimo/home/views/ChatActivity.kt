@@ -25,10 +25,9 @@ class ChatActivity : AppCompatActivity() {
     private lateinit var messagesRecyclerView: RecyclerView
     private lateinit var sendButton: ImageButton
     private lateinit var messageInput: EditText
-    private lateinit var sender: String
-    private lateinit var recipient: String
     private lateinit var currentUserId: String
     private lateinit var donationId: String
+    private lateinit var donationCreatorId: String
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,15 +37,12 @@ class ChatActivity : AppCompatActivity() {
         // Inicializando Firestore e referências
         firestore = FirebaseFirestore.getInstance()
         donationId = intent.getStringExtra("donationId")!! // Recebe a referência da doação
-        recipient = intent.getStringExtra("recipient")!! // Recebe a referência do destinatário
-        sender = intent.getStringExtra("sender")!! // Defina o ID do usuário atual
+        donationCreatorId = intent.getStringExtra("donationCreatorId")!! // Recebe a referência da doação
         currentUserId = intent.getStringExtra("currentUserId")!!
 
-        println("ACTIVITY")
-        println(intent.getStringExtra("sender"))
         // Configurando o RecyclerView e o Adapter
         messagesRecyclerView = findViewById(R.id.recycler_view_messages)
-        messageAdapter = MessageAdapter(sender)
+        messageAdapter = MessageAdapter(currentUserId)
         messagesRecyclerView.layoutManager = LinearLayoutManager(this)
         messagesRecyclerView.adapter = messageAdapter
 
@@ -90,13 +86,13 @@ class ChatActivity : AppCompatActivity() {
     private fun sendMessage() {
         val messageText = messageInput.text.toString().trim()
         if (messageText.isNotEmpty()) {
-            val sortedList = listOf(sender, recipient).sorted()
-            val chatId = Hash.generateHash(sortedList.plus(listOf(donationId)))
+            //val sortedList = listOf(currentUserId, donationCreatorId).sorted()
+            val chatId = Hash.generateHash(listOf(donationId))
 
             val message = Message(
                 message = messageText,
-                sender = sender,
-                recipient = recipient,
+                sender = currentUserId,
+                recipient = donationCreatorId,
                 timestamp = Datetime.getCurrentDatetime(),
                 // isso garante que o id do chat sempre será o mesmo
                 donationId = donationId,
@@ -116,8 +112,8 @@ class ChatActivity : AppCompatActivity() {
 
             val chat = Chat(
                 id = chatId,
-                sender = sender,
-                recipient = recipient,
+                sender = currentUserId,
+                recipient = donationCreatorId,
                 donation = donationId,
                 createdAt = Datetime.getCurrentDatetime(),
                 lastMessage = messageText

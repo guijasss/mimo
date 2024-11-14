@@ -81,11 +81,26 @@ class ChatListActivity : AppCompatActivity() {
     }
 
     private fun openChat(chat: Chat) {
-        val intent = Intent(this, ChatActivity::class.java)
-        intent.putExtra("donationId", chat.donation)
-        intent.putExtra("recipient", chat.recipient)
-        intent.putExtra("sender", chat.sender)
-        intent.putExtra("currentUserId", currentUserId)
-        startActivity(intent)
+        firestore.collection("donation").whereEqualTo("id", chat.donation).get()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val querySnapshot = task.result
+                    if (querySnapshot != null && !querySnapshot.isEmpty) {
+                        val document = querySnapshot.documents[0]
+                        val creatorId = document.getString("creatorId")?.substringAfterLast("/")
+
+                        val intent = Intent(this, ChatActivity::class.java)
+                        intent.putExtra("donationId", chat.donation)
+                        intent.putExtra("donationCreatorId", creatorId)
+                        intent.putExtra("currentUserId", currentUserId)
+                        startActivity(intent)
+                    } else {
+                        println("ERROR")
+                    }
+                } else {
+                    // Tratar falha ao verificar a existência do documento
+                    task.exception?.printStackTrace()
+                }
+            }
     }
 }

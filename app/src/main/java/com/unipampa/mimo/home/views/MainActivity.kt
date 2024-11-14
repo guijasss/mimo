@@ -53,10 +53,8 @@ class MainActivity : AppCompatActivity(), HomeContracts.View {
         recyclerView = findViewById(R.id.recycler_view_anuncios)
         donationAdapter = DonationAdapter { donation ->
             val intent = Intent(this, ChatActivity::class.java)
-
             intent.putExtra("donationId", donation.id)
-            intent.putExtra("recipient", donation.creator!!.id)
-            intent.putExtra("sender", currentUserId)
+            intent.putExtra("donationCreatorId", donation.creator?.id)
             intent.putExtra("currentUserId", currentUserId)
             startActivity(intent)
         }

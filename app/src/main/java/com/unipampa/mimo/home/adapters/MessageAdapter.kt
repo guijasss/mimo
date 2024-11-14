@@ -25,6 +25,9 @@ class MessageAdapter(
     }
 
     override fun getItemViewType(position: Int): Int {
+        println("AAAAAAA")
+        println(getItem(position).sender)
+        println(currentUserRef)
         return if (getItem(position).sender == currentUserRef) VIEW_TYPE_SENT else VIEW_TYPE_RECEIVED
     }
 
